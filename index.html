@@ -186,13 +186,13 @@
             <p style="margin-top: 1rem; font-size: 0.8rem;">Wird keiner reich von, keiner arm..</p>
         </section>
 
-        <a href="javascript:void(0)" class="cta" onclick="openForm()">Teilnehmen</a>
+        <a href="javascript:void(0)" class="cta" id="cta-btn" onclick="openForm()">Teilnehmen</a>
 
-        <div style="margin-top:1.5rem; border:2px dashed #aaa; padding:1.5rem; background:#fff9f9;">
-            <p style="color:#888; font-size:0.85rem; line-height:1.6; margin-bottom:1rem;">
+        <div id="waitlist-box-container" style="margin-top:1.5rem; border:2px dashed #aaa; padding:1.5rem; background:#fff9f9;">
+            <p id="waitlist-info-text" style="color:#888; font-size:0.85rem; line-height:1.6; margin-bottom:1rem;">
                 Gruppe voll? Dann lass deine Kontaktdaten da — ich melde mich wenn es weitergeht.
             </p>
-            <a href="javascript:void(0)" onclick="openWaitlist()"
+            <a href="javascript:void(0)" id="waitlist-trigger-btn" onclick="openWaitlist()"
                style="display:block; text-align:center; background:transparent; border:2px solid #aaa; color:#999; padding:0.9rem; font-family:'Space Grotesk',sans-serif; font-weight:700; text-transform:uppercase; font-size:0.8rem; text-decoration:none;">
                 Voll — Warteliste — Kontaktdaten dalassen?
             </a>
@@ -325,6 +325,7 @@
             let count = parseInt(localStorage.getItem('dresden-count') || '0');
             count++; if (count > 6) count = 1;
             localStorage.setItem('dresden-count', count);
+            updateWaitlistUI();
 
             const conf = document.getElementById('confirmation');
             if (count < 6) {
@@ -377,6 +378,40 @@
         function closeInfo() {
             document.getElementById('info-overlay').style.display = 'none';
         }
+
+        function updateWaitlistUI() {
+            const count = parseInt(localStorage.getItem('dresden-count') || '0');
+            const ctaBtn = document.getElementById('cta-btn');
+            const infoText = document.getElementById('waitlist-info-text');
+            const triggerBtn = document.getElementById('waitlist-trigger-btn');
+
+            if (count >= 6) {
+                if (ctaBtn) {
+                    ctaBtn.textContent = "Ausgebucht / Warteliste";
+                    ctaBtn.style.backgroundColor = "#555";
+                }
+                if (infoText) {
+                    infoText.textContent = "Diese Runde ist voll besetzt. Trag dich in die Warteliste ein und erfahre als Erste/r, wenn wir die nächste Runde starten.";
+                }
+                if (triggerBtn) {
+                    triggerBtn.textContent = "Auf die Warteliste setzen";
+                }
+            } else {
+                if (ctaBtn) {
+                    ctaBtn.textContent = "Teilnehmen";
+                    ctaBtn.style.backgroundColor = "";
+                }
+                if (infoText) {
+                    infoText.textContent = "Noch freie Plätze — du hast gerade keine Zeit oder willst erst bei der nächsten Runde mitmachen? Lass deine Kontaktdaten da.";
+                }
+                if (triggerBtn) {
+                    triggerBtn.textContent = "Für spätere Runden eintragen";
+                }
+            }
+        }
+
+        // Initialize UI state
+        updateWaitlistUI();
     </script>
 
     <footer style="text-align:center; padding:2rem 1rem; font-size:0.75rem; font-family:'Inter',sans-serif;">
