@@ -353,16 +353,17 @@
             box-sizing: border-box;
             padding: 15mm; /* 15mm white margin for overlapping / stitching */
             position: relative;
-            background-color: #ffffff;
+            background-color: var(--bg-color); /* RED BACKGROUND */
         }
 
-        /* Massive original poster block, scaled & clipped */
+        /* Center poster canvas, matching website drop-shadow card */
         .a2-poster-canvas {
             position: absolute;
-            width: 380mm; /* A2 width is 420mm - 2x15mm margins - 10mm tolerance = 380mm */
-            height: 554mm; /* A2 height is 594mm - 2x15mm margins - 10mm tolerance = 554mm */
-            background-color: var(--text-color);
-            border: 8px solid var(--accent-color);
+            width: 360mm; /* A2 width is 420mm - Centered with margins */
+            height: 520mm; /* A2 height is 594mm - Centered with margins */
+            background-color: var(--text-color); /* Yellow */
+            border: 6px solid var(--accent-color);
+            box-shadow: 20px 20px 0px var(--accent-color); /* WEBSITE DROP SHADOW */
             box-sizing: border-box;
             padding: 35px;
             display: flex;
@@ -370,22 +371,22 @@
             justify-content: space-between;
         }
 
-        /* Layout offsets for the 4 quarters */
+        /* Layout offsets for the 4 quarters, centering the yellow card */
         .q-top-left .a2-poster-canvas {
-            top: 15mm;
-            left: 15mm;
+            top: 37mm; /* (594 - 520) / 2 = 37mm margin top */
+            left: 30mm; /* (420 - 360) / 2 = 30mm margin left */
         }
         .q-top-right .a2-poster-canvas {
-            top: 15mm;
-            left: calc(15mm - 190mm); /* Shift left by 190mm (half A2 printable width) */
+            top: 37mm;
+            left: calc(30mm - 190mm); /* Shift left by 190mm (half A2 printable width) */
         }
         .q-bottom-left .a2-poster-canvas {
-            top: calc(15mm - 277mm); /* Shift up by 277mm (half A2 printable height) */
-            left: 15mm;
+            top: calc(37mm - 277mm); /* Shift up by 277mm (half A2 printable height) */
+            left: 30mm;
         }
         .q-bottom-right .a2-poster-canvas {
-            top: calc(15mm - 277mm);
-            left: calc(15mm - 190mm);
+            top: calc(37mm - 277mm);
+            left: calc(30mm - 190mm);
         }
 
         /* Stitch guidelines inside margins */
@@ -394,30 +395,31 @@
             border: 1px dashed #aaaaaa;
             pointer-events: none;
         }
-        .line-right { top: 15mm; bottom: 15mm; right: 15mm; border-right: 1px dashed #999; }
-        .line-left { top: 15mm; bottom: 15mm; left: 15mm; border-left: 1px dashed #999; }
-        .line-bottom { left: 15mm; right: 15mm; bottom: 15mm; border-bottom: 1px dashed #999; }
-        .line-top { left: 15mm; right: 15mm; top: 15mm; border-top: 1px dashed #999; }
+        .line-right { top: 15mm; bottom: 15mm; right: 15mm; border-right: 1px dashed #ffffff; }
+        .line-left { top: 15mm; bottom: 15mm; left: 15mm; border-left: 1px dashed #ffffff; }
+        .line-bottom { left: 15mm; right: 15mm; bottom: 15mm; border-bottom: 1px dashed #ffffff; }
+        .line-top { left: 15mm; right: 15mm; top: 15mm; border-top: 1px dashed #ffffff; }
 
         .stitch-lbl {
             position: absolute;
             font-size: 10px;
-            color: #999;
+            color: #ffffff;
             font-family: monospace;
             text-transform: uppercase;
             font-weight: 700;
         }
 
-        /* Large A2 Poster Content */
+        /* A2 Poster Content */
         .a2-header {
-            border-bottom: 8px solid var(--accent-color);
+            border-bottom: 4px solid var(--accent-color);
             padding-bottom: 15px;
             margin-bottom: 15px;
+            text-align: center;
         }
 
         .a2-title {
             font-family: var(--font-heading);
-            font-size: 5rem;
+            font-size: 4.8rem;
             font-weight: 900;
             line-height: 0.85;
             letter-spacing: -2px;
@@ -425,84 +427,41 @@
         }
 
         .a2-slogan {
-            font-size: 1.8rem;
+            font-size: 1.65rem;
             font-weight: 700;
             font-style: italic;
             color: var(--bg-color);
-            margin-top: 12px;
+            margin-top: 10px;
         }
 
         .a2-body {
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 20px;
             flex-grow: 1;
             justify-content: space-around;
         }
 
-        .a2-row {
-            display: flex;
-            gap: 25px;
-            align-items: stretch;
-        }
-
-        .a2-deal-box {
-            border: 4px solid var(--accent-color);
-            background-color: #fffdec;
-            padding: 24px;
-            font-size: 1.45rem;
-            line-height: 1.45;
-            flex: 1.3;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .a2-deal-box strong {
-            font-size: 1.9rem;
-            text-transform: uppercase;
-            font-weight: 900;
-            display: block;
-            margin-bottom: 10px;
-            border-bottom: 3px solid var(--accent-color);
-            padding-bottom: 5px;
-        }
-
-        .a2-qr-box {
-            border: 4px solid var(--accent-color);
-            background-color: #ffffff;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex: 0.7;
-        }
-
-        .a2-qr-img {
-            width: 170px;
-            height: 170px;
-        }
-
-        .a2-qr-text {
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            margin-top: 12px;
-            letter-spacing: 0.5px;
-        }
-
-        .a2-stats-row {
+        /* Stat boxes grid structure matching the website screenshot layout */
+        .a2-stats-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 10px 0;
         }
 
-        .a2-stat-card {
-            border: 4px solid var(--accent-color);
+        .a2-stat-card-full {
+            grid-column: span 2;
+            border: 3px solid var(--accent-color);
             text-align: center;
-            padding: 15px;
+            padding: 18px;
+            background-color: var(--text-color);
+        }
+
+        .a2-stat-card-half {
+            border: 3px solid var(--accent-color);
+            text-align: center;
+            padding: 18px;
             background-color: var(--text-color);
         }
 
@@ -518,30 +477,69 @@
             font-weight: 700;
             text-transform: uppercase;
             display: block;
+            margin-top: 4px;
         }
 
-        .a2-footer {
-            border-top: 8px solid var(--accent-color);
-            padding-top: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .a2-url {
-            font-family: var(--font-heading);
-            font-size: 2.6rem;
-            font-weight: 900;
-            text-transform: uppercase;
-        }
-
-        .a2-tag {
+        .a2-deal-box {
+            border: 3px solid var(--accent-color);
+            background-color: var(--text-color);
+            padding: 24px;
             font-size: 1.4rem;
-            font-weight: 900;
-            background-color: var(--accent-color);
-            color: var(--text-color);
-            padding: 5px 20px;
+            line-height: 1.45;
+        }
+
+        .a2-deal-box strong {
+            font-size: 1.7rem;
             text-transform: uppercase;
+            font-weight: 900;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Footer matching button look of website with QR integrated alongside */
+        .a2-footer-row {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .a2-btn-mock {
+            flex: 1.2;
+            background-color: var(--bg-color);
+            border: 4px solid var(--accent-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 22px;
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 2.1rem;
+            text-transform: uppercase;
+        }
+
+        .a2-qr-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 0.8;
+            padding: 5px;
+        }
+
+        .a2-qr-img {
+            width: 105px;
+            height: 105px;
+            mix-blend-mode: multiply; /* Renders transparently directly on yellow background */
+        }
+
+        .a2-qr-text {
+            font-size: 0.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-top: 5px;
+            font-family: var(--font-heading);
+            letter-spacing: 0.2px;
+            text-align: center;
         }
 
         /* --- PRINT STYLES --- */
@@ -701,36 +699,39 @@
                         <p class="a2-slogan">"Wollen wir alle nicht, aber irgendwie muss es ja weitergehen"</p>
                     </div>
                     <div class="a2-body">
-                        <div class="a2-row">
-                            <div class="a2-deal-box">
-                                <strong>Der Deal:</strong>
-                                60&euro; Pfand-Einsatz-Mischung.<br><br>
-                                Erscheine zu mindestens 5 von 6 Terminen und du bekommst <strong>30&euro; digital auf die Kralle</strong> zurück.
-                                <p style="font-size: 1.15rem; margin-top: 15px; font-style: italic;">Wird keiner reich von, keiner arm..</p>
-                            </div>
-                            <div class="a2-qr-box">
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://arbeit-fuer-lau.vercel.app" class="a2-qr-img" alt="QR Code">
-                                <span class="a2-qr-text">Hier Anmelden</span>
-                            </div>
-                        </div>
-                        <div class="a2-stats-row">
-                            <div class="a2-stat-card">
+                        
+                        <div class="a2-stats-grid">
+                            <div class="a2-stat-card-full">
                                 <span class="a2-stat-val">1X PRO WOCHE</span>
                                 <span class="a2-stat-lbl">6 Wochen lang</span>
                             </div>
-                            <div class="a2-stat-card">
+                            <div class="a2-stat-card-half">
                                 <span class="a2-stat-val">2 STD</span>
                                 <span class="a2-stat-lbl">Pro Séance</span>
                             </div>
-                            <div class="a2-stat-card">
+                            <div class="a2-stat-card-half">
                                 <span class="a2-stat-val">6 MAX</span>
                                 <span class="a2-stat-lbl">Teilnehmende</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="a2-footer">
-                        <span class="a2-url">arbeit-fuer-lau.vercel.app</span>
-                        <span class="a2-tag">Dresden</span>
+
+                        <div class="a2-deal-box">
+                            <strong>DER DEAL:</strong>
+                            <strong>60&euro; Pfand-Einsatz-Mischung.</strong>
+                            Erscheine zu mind. 5 von 6 Terminen und du bekommst <strong>30&euro; digital auf die Kralle</strong> zurück.
+                            <p style="font-size: 1.1rem; margin-top: 12px; font-style: italic;">Wird keiner reich von, keiner arm..</p>
+                        </div>
+
+                        <div class="a2-footer-row">
+                            <div class="a2-btn-mock">
+                                Teilnehmen
+                            </div>
+                            <div class="a2-qr-container">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://arbeit-fuer-lau.vercel.app" class="a2-qr-img" alt="QR Code">
+                                <span class="a2-qr-text">arbeit-fuer-lau.vercel.app</span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -751,36 +752,39 @@
                         <p class="a2-slogan">"Wollen wir alle nicht, aber irgendwie muss es ja weitergehen"</p>
                     </div>
                     <div class="a2-body">
-                        <div class="a2-row">
-                            <div class="a2-deal-box">
-                                <strong>Der Deal:</strong>
-                                60&euro; Pfand-Einsatz-Mischung.<br><br>
-                                Erscheine zu mindestens 5 von 6 Terminen und du bekommst <strong>30&euro; digital auf die Kralle</strong> zurück.
-                                <p style="font-size: 1.15rem; margin-top: 15px; font-style: italic;">Wird keiner reich von, keiner arm..</p>
-                            </div>
-                            <div class="a2-qr-box">
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://arbeit-fuer-lau.vercel.app" class="a2-qr-img" alt="QR Code">
-                                <span class="a2-qr-text">Hier Anmelden</span>
-                            </div>
-                        </div>
-                        <div class="a2-stats-row">
-                            <div class="a2-stat-card">
+                        
+                        <div class="a2-stats-grid">
+                            <div class="a2-stat-card-full">
                                 <span class="a2-stat-val">1X PRO WOCHE</span>
                                 <span class="a2-stat-lbl">6 Wochen lang</span>
                             </div>
-                            <div class="a2-stat-card">
+                            <div class="a2-stat-card-half">
                                 <span class="a2-stat-val">2 STD</span>
                                 <span class="a2-stat-lbl">Pro Séance</span>
                             </div>
-                            <div class="a2-stat-card">
+                            <div class="a2-stat-card-half">
                                 <span class="a2-stat-val">6 MAX</span>
                                 <span class="a2-stat-lbl">Teilnehmende</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="a2-footer">
-                        <span class="a2-url">arbeit-fuer-lau.vercel.app</span>
-                        <span class="a2-tag">Dresden</span>
+
+                        <div class="a2-deal-box">
+                            <strong>DER DEAL:</strong>
+                            <strong>60&euro; Pfand-Einsatz-Mischung.</strong>
+                            Erscheine zu mind. 5 von 6 Terminen und du bekommst <strong>30&euro; digital auf die Kralle</strong> zurück.
+                            <p style="font-size: 1.1rem; margin-top: 12px; font-style: italic;">Wird keiner reich von, keiner arm..</p>
+                        </div>
+
+                        <div class="a2-footer-row">
+                            <div class="a2-btn-mock">
+                                Teilnehmen
+                            </div>
+                            <div class="a2-qr-container">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://arbeit-fuer-lau.vercel.app" class="a2-qr-img" alt="QR Code">
+                                <span class="a2-qr-text">arbeit-fuer-lau.vercel.app</span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -801,36 +805,39 @@
                         <p class="a2-slogan">"Wollen wir alle nicht, aber irgendwie muss es ja weitergehen"</p>
                     </div>
                     <div class="a2-body">
-                        <div class="a2-row">
-                            <div class="a2-deal-box">
-                                <strong>Der Deal:</strong>
-                                60&euro; Pfand-Einsatz-Mischung.<br><br>
-                                Erscheine zu mindestens 5 von 6 Terminen und du bekommst <strong>30&euro; digital auf die Kralle</strong> zurück.
-                                <p style="font-size: 1.15rem; margin-top: 15px; font-style: italic;">Wird keiner reich von, keiner arm..</p>
-                            </div>
-                            <div class="a2-qr-box">
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://arbeit-fuer-lau.vercel.app" class="a2-qr-img" alt="QR Code">
-                                <span class="a2-qr-text">Hier Anmelden</span>
-                            </div>
-                        </div>
-                        <div class="a2-stats-row">
-                            <div class="a2-stat-card">
+                        
+                        <div class="a2-stats-grid">
+                            <div class="a2-stat-card-full">
                                 <span class="a2-stat-val">1X PRO WOCHE</span>
                                 <span class="a2-stat-lbl">6 Wochen lang</span>
                             </div>
-                            <div class="a2-stat-card">
+                            <div class="a2-stat-card-half">
                                 <span class="a2-stat-val">2 STD</span>
                                 <span class="a2-stat-lbl">Pro Séance</span>
                             </div>
-                            <div class="a2-stat-card">
+                            <div class="a2-stat-card-half">
                                 <span class="a2-stat-val">6 MAX</span>
                                 <span class="a2-stat-lbl">Teilnehmende</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="a2-footer">
-                        <span class="a2-url">arbeit-fuer-lau.vercel.app</span>
-                        <span class="a2-tag">Dresden</span>
+
+                        <div class="a2-deal-box">
+                            <strong>DER DEAL:</strong>
+                            <strong>60&euro; Pfand-Einsatz-Mischung.</strong>
+                            Erscheine zu mind. 5 von 6 Terminen und du bekommst <strong>30&euro; digital auf die Kralle</strong> zurück.
+                            <p style="font-size: 1.1rem; margin-top: 12px; font-style: italic;">Wird keiner reich von, keiner arm..</p>
+                        </div>
+
+                        <div class="a2-footer-row">
+                            <div class="a2-btn-mock">
+                                Teilnehmen
+                            </div>
+                            <div class="a2-qr-container">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://arbeit-fuer-lau.vercel.app" class="a2-qr-img" alt="QR Code">
+                                <span class="a2-qr-text">arbeit-fuer-lau.vercel.app</span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -851,36 +858,39 @@
                         <p class="a2-slogan">"Wollen wir alle nicht, aber irgendwie muss es ja weitergehen"</p>
                     </div>
                     <div class="a2-body">
-                        <div class="a2-row">
-                            <div class="a2-deal-box">
-                                <strong>Der Deal:</strong>
-                                60&euro; Pfand-Einsatz-Mischung.<br><br>
-                                Erscheine zu mindestens 5 von 6 Terminen und du bekommst <strong>30&euro; digital auf die Kralle</strong> zurück.
-                                <p style="font-size: 1.15rem; margin-top: 15px; font-style: italic;">Wird keiner reich von, keiner arm..</p>
-                            </div>
-                            <div class="a2-qr-box">
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://arbeit-fuer-lau.vercel.app" class="a2-qr-img" alt="QR Code">
-                                <span class="a2-qr-text">Hier Anmelden</span>
-                            </div>
-                        </div>
-                        <div class="a2-stats-row">
-                            <div class="a2-stat-card">
+                        
+                        <div class="a2-stats-grid">
+                            <div class="a2-stat-card-full">
                                 <span class="a2-stat-val">1X PRO WOCHE</span>
                                 <span class="a2-stat-lbl">6 Wochen lang</span>
                             </div>
-                            <div class="a2-stat-card">
+                            <div class="a2-stat-card-half">
                                 <span class="a2-stat-val">2 STD</span>
                                 <span class="a2-stat-lbl">Pro Séance</span>
                             </div>
-                            <div class="a2-stat-card">
+                            <div class="a2-stat-card-half">
                                 <span class="a2-stat-val">6 MAX</span>
                                 <span class="a2-stat-lbl">Teilnehmende</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="a2-footer">
-                        <span class="a2-url">arbeit-fuer-lau.vercel.app</span>
-                        <span class="a2-tag">Dresden</span>
+
+                        <div class="a2-deal-box">
+                            <strong>DER DEAL:</strong>
+                            <strong>60&euro; Pfand-Einsatz-Mischung.</strong>
+                            Erscheine zu mind. 5 von 6 Terminen und du bekommst <strong>30&euro; digital auf die Kralle</strong> zurück.
+                            <p style="font-size: 1.1rem; margin-top: 12px; font-style: italic;">Wird keiner reich von, keiner arm..</p>
+                        </div>
+
+                        <div class="a2-footer-row">
+                            <div class="a2-btn-mock">
+                                Teilnehmen
+                            </div>
+                            <div class="a2-qr-container">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://arbeit-fuer-lau.vercel.app" class="a2-qr-img" alt="QR Code">
+                                <span class="a2-qr-text">arbeit-fuer-lau.vercel.app</span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
