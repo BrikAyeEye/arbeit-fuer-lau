@@ -1,0 +1,128 @@
+:root {
+    --bg-color: #cc0000;
+    /* Soviet Red */
+    --text-color: #ffcc00;
+    /* Yellow */
+    --accent-color: #000000;
+    /* Black */
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--accent-color);
+    font-family: var(--font-body);
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+main {
+    max-width: 500px;
+    width: 100%;
+    border: 4px solid var(--accent-color);
+    background-color: var(--text-color);
+    padding: 2rem;
+    box-shadow: 15px 15px 0px var(--accent-color);
+}
+
+.header {
+    text-align: center;
+    border-bottom: 4px solid var(--accent-color);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+}
+
+.slogan {
+    margin-top: 1rem;
+    font-weight: 700;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--bg-color);
+}
+
+.rule-block {
+    border: 2px solid var(--accent-color);
+    padding: 1rem;
+    margin: 2rem 0;
+}
+
+.rule-title {
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-item {
+    border: 2px solid var(--accent-color);
+    padding: 1rem;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 900;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.cta {
+    display: block;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    text-align: center;
+    padding: 1.5rem;
+    font-weight: 900;
+    font-size: 1.5rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 3px solid var(--accent-color);
+}
+
+.cta:hover {
+    background-color: var(--accent-color);
+}
+
+.footer-quote {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+@media (max-width: 400px) {
+    .title {
+        font-size: 2.5rem;
+    }
+}
