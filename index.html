@@ -1,59 +1,122 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARBEIT FÜR LAU | Dresden Execution</title>
+    <title>ARBEIT FÜR LAU | Dresden</title>
+    <meta name="description" content="6 Wochen, 1x pro Woche, 2 Stunden. 60€ rein, 30€ digital zurück wenn du dabei bleibst.">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;900&family=Inter:wght@400;700;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* Modal Styles */
+        /* --- MODAL --- */
         #modal-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(204, 0, 0, 0.9);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(204, 0, 0, 0.95);
             z-index: 1000;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             padding: 2rem;
+            overflow-y: auto;
         }
-
         #modal-content {
             background: #ffcc00;
             border: 4px solid #000;
-            padding: 2rem;
-            max-width: 600px;
-            box-shadow: 15px 15px 0px #000;
-            font-family: 'Inter', sans-serif;
+            padding: 2.5rem;
+            max-width: 580px;
+            width: 100%;
+            margin-top: 2rem;
             position: relative;
+            box-shadow: 12px 12px 0 #000;
+            font-family: 'Inter', sans-serif;
         }
-
-        #modal-content h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
-
         .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            font-weight: 900;
-            font-size: 1.5rem;
+            position: absolute; top: 1rem; right: 1.5rem;
+            cursor: pointer; font-weight: 900; font-size: 1.5rem;
+            color: #000; background: none; border: none;
+        }
+        .modal-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem; letter-spacing: 0.2em;
+            text-transform: uppercase; color: #000;
+            margin-bottom: 2rem; font-weight: 700;
+        }
+        .step { display: none; }
+        .step.active { display: block; }
+
+        /* Track options */
+        .track-options { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem; }
+        .track-option {
+            display: flex; align-items: flex-start; gap: 0.75rem;
+            background: #fff8cc; border: 2px solid #000;
+            padding: 1rem; cursor: pointer; transition: background 0.15s;
+        }
+        .track-option:hover { background: #fff; }
+        .track-option.selected { background: #000; color: #ffcc00; }
+        .track-option.selected .track-label strong { color: #ffcc00; }
+        .track-option.selected .track-label span { color: #aaa; }
+        .track-option input[type="radio"] { margin-top: 3px; accent-color: #000; flex-shrink: 0; }
+        .track-label strong { display: block; color: #000; font-size: 0.95rem; }
+        .track-label span { color: #555; font-size: 0.8rem; }
+
+        /* Form fields */
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label {
+            display: block; font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 0.1em; color: #333; margin-bottom: 0.4rem; font-weight: 700;
+        }
+        .form-group input {
+            width: 100%; background: #fff; border: 2px solid #000;
+            color: #000; padding: 0.85rem 1rem;
+            font-family: 'Inter', sans-serif; font-size: 1rem; outline: none;
+        }
+        .form-group input:focus { background: #fffde0; }
+
+        .modal-btn {
+            display: block; width: 100%; background: #000; color: #ffcc00;
+            border: none; padding: 1.2rem;
+            font-family: 'Space Grotesk', sans-serif; font-weight: 900;
+            font-size: 1.1rem; text-transform: uppercase;
+            cursor: pointer; transition: background 0.2s; margin-top: 1rem;
+        }
+        .modal-btn:hover { background: #222; }
+        .modal-btn.secondary {
+            background: transparent; color: #000; border: 2px solid #000;
+            font-size: 0.85rem; margin-top: 0.5rem;
+        }
+        .modal-btn.secondary:hover { background: #000; color: #ffcc00; }
+
+        .error-msg { color: #cc0000; font-size: 0.8rem; margin-top: 0.5rem; display: none; font-weight: 700; }
+
+        /* Confirmation */
+        #confirmation h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem; font-weight: 900;
+            text-transform: uppercase; color: #000; margin-bottom: 1.5rem;
+        }
+        #confirmation p { line-height: 1.8; margin-bottom: 0.75rem; color: #222; }
+        #confirmation strong { color: #000; }
+        #confirmation ul { margin: 0.75rem 0; padding-left: 1.5rem; color: #333; }
+        #confirmation li { margin-bottom: 0.5rem; }
+
+        /* Waitlist modal */
+        #waitlist-overlay {
+            display: none; position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.88); z-index: 1000;
+            justify-content: center; align-items: center; padding: 2rem;
+        }
+        #waitlist-box {
+            background: #ffcc00; border: 4px solid #000;
+            padding: 2.5rem; max-width: 480px; width: 100%;
+            position: relative; box-shadow: 12px 12px 0 #000;
+            font-family: 'Inter', sans-serif;
         }
     </style>
 </head>
-
 <body>
 
     <main>
@@ -68,7 +131,7 @@
                 <span class="stat-label">6 Wochen lang</span>
             </div>
             <div class="stat-item">
-                <span class="stat-value">2 STUNDEN</span>
+                <span class="stat-value">2 STD</span>
                 <span class="stat-label">Pro Session</span>
             </div>
             <div class="stat-item">
@@ -80,65 +143,184 @@
         <section class="rule-block">
             <p class="rule-title">Der Deal:</p>
             <p><strong>60€ Pfand-Einsatz-Mischung.</strong></p>
-            <p>Erscheine zu mind. 5 von 6 Terminen und du bekommst <strong>30€ digital auf die Kralle</strong> zurück.
-            </p>
+            <p>Erscheine zu mind. 5 von 6 Terminen und du bekommst <strong>30€ digital auf die Kralle</strong> zurück.</p>
             <p style="margin-top: 1rem; font-size: 0.8rem;">Wird keiner reich von, keiner arm..</p>
         </section>
 
-        <a href="javascript:void(0)" class="cta" onclick="register()">Teilnehmen</a>
+        <a href="javascript:void(0)" class="cta" onclick="openForm()">Teilnehmen</a>
 
+        <div style="margin-top:1.5rem; border:2px dashed #aaa; padding:1.5rem; background:#fff9f9;">
+            <p style="color:#888; font-size:0.85rem; line-height:1.6; margin-bottom:1rem;">
+                Gruppe voll? Dann lass deine Kontaktdaten da — ich melde mich wenn es weitergeht.
+            </p>
+            <a href="javascript:void(0)" onclick="openWaitlist()"
+               style="display:block; text-align:center; background:transparent; border:2px solid #aaa; color:#999; padding:0.9rem; font-family:'Space Grotesk',sans-serif; font-weight:700; text-transform:uppercase; font-size:0.8rem; text-decoration:none;">
+                Voll — Warteliste — Kontaktdaten dalassen?
+            </a>
+        </div>
     </main>
 
+    <!-- REGISTRATION MODAL -->
     <div id="modal-overlay">
         <div id="modal-content">
-            <span class="close-btn" onclick="closeModal()">✕</span>
-            <div id="registration-text"></div>
+            <button class="close-btn" onclick="closeModal()">✕</button>
+
+            <!-- STEP 1: Termin -->
+            <div class="step active" id="step-track">
+                <p class="modal-title">Welcher Termin passt dir?</p>
+                <div class="track-options">
+                    <label class="track-option" id="opt-a">
+                        <input type="radio" name="track" value="A">
+                        <div class="track-label">
+                            <strong>Option A — Nur Dienstag, 10:00–12:00</strong>
+                            <span>Nur dieser Termin</span>
+                        </div>
+                    </label>
+                    <label class="track-option" id="opt-b">
+                        <input type="radio" name="track" value="B">
+                        <div class="track-label">
+                            <strong>Option B — Nur Donnerstag, 10:00–12:00</strong>
+                            <span>Nur dieser Termin</span>
+                        </div>
+                    </label>
+                    <label class="track-option" id="opt-c">
+                        <input type="radio" name="track" value="C">
+                        <div class="track-label">
+                            <strong>Option C — Beide Tage passen mir</strong>
+                            <span>Ich bin flexibel</span>
+                        </div>
+                    </label>
+                </div>
+                <p class="error-msg" id="track-error">Bitte einen Termin auswählen.</p>
+                <button class="modal-btn" onclick="goToStep2()">Weiter →</button>
+            </div>
+
+            <!-- STEP 2: Kontaktdaten -->
+            <div class="step" id="step-contact">
+                <p class="modal-title">Deine Kontaktdaten</p>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Dein Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact">Email oder Telefon (WhatsApp / Signal)</label>
+                    <input type="text" id="contact" placeholder="email@beispiel.de oder +49..." required>
+                </div>
+                <p class="error-msg" id="contact-error">Bitte alle Felder ausfüllen.</p>
+                <button class="modal-btn" onclick="submitForm()">Absenden</button>
+                <button class="modal-btn secondary" onclick="goToStep1()">← Zurück</button>
+            </div>
+
+            <!-- CONFIRMATION -->
+            <div class="step" id="step-confirm">
+                <div id="confirmation"></div>
+                <button class="modal-btn" onclick="closeModal()" style="margin-top:2rem;">Fertig</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- WAITLIST MODAL -->
+    <div id="waitlist-overlay">
+        <div id="waitlist-box">
+            <button onclick="closeWaitlist()" style="position:absolute;top:1rem;right:1.5rem;background:none;border:none;color:#000;font-size:1.5rem;cursor:pointer;font-weight:900;">✕</button>
+            <p class="modal-title" style="color:#000;">Kontaktdaten dalassen</p>
+            <div class="form-group">
+                <label for="w-name">Name</label>
+                <input type="text" id="w-name" placeholder="Dein Name">
+            </div>
+            <div class="form-group">
+                <label for="w-contact">Email oder Telefon</label>
+                <input type="text" id="w-contact" placeholder="email@beispiel.de oder +49...">
+            </div>
+            <button class="modal-btn" onclick="submitWaitlist()">Ich bin interessiert</button>
         </div>
     </div>
 
     <script>
-        function register() {
-            // Simulated Logic: Check if we have a participant count in localStorage
-            let count = parseInt(localStorage.getItem('participantCount') || "0");
-            count++;
-            if (count > 6) count = 1; // Reset for demo purposes
-            localStorage.setItem('participantCount', count);
+        let selectedTrack = null;
+        const ordinals = ['erste', 'zweite', 'dritte', 'vierte', 'fünfte'];
+        const trackNames = { A: 'Dienstag 10–12', B: 'Donnerstag 10–12', C: 'Beide Optionen' };
 
-            const textDiv = document.getElementById('registration-text');
-            if (count < 6) {
-                textDiv.innerHTML = `
-                    <h2>Danke für dein Interesse!</h2>
-                    <p>Du bist die/der <strong>${count}. Teilnehmende</strong> für diese Runde.</p>
-                    <p style="margin-top:1rem">Sobald die Gruppe voll besetzt ist (maximal 6 Personen), legen wir los. Du bekommst dann direkt eine Nachricht von mir mit allen Details:</p>
-                    <ul style="margin-top:1rem; list-style: square; padding-left: 1.5rem;">
-                        <li>Startermin und Wochentag (abgestimmt auf die Gruppe)</li>
-                        <li>Bankverbindung (für den 60€ Einwurf auf mein Wise-Konto)</li>
-                        <li>Einwahldaten / Adresse für die Sessions</li>
-                    </ul>
-                    <p style="margin-top:1rem">Ich melde mich, sobald wir vollzählig sind.</p>
-                `;
-            } else {
-                textDiv.innerHTML = `
-                    <h2>Danke für dein Interesse!</h2>
-                    <p>Du bist die/der <strong>sechste und letzte Teilnehmende</strong> für diese Runde. Die Gruppe ist damit vollzählig.</p>
-                    <p style="margin-top:1rem">Wir legen jetzt zeitnah los. Du bekommst von mir in Kürze eine Nachricht mit den finalen Details:</p>
-                    <ul style="margin-top:1rem; list-style: square; padding-left: 1.5rem;">
-                        <li>Startermin und Wochentag (basierend auf den Rückmeldungen)</li>
-                        <li>Bankverbindung (für den 60€ Einwurf auf mein Wise-Konto)</li>
-                        <li>Einwahldaten / Adresse für die Sessions</li>
-                    </ul>
-                    <p style="margin-top:1rem">Ich melde mich direkt bei dir und den anderen, um den Start zu fixieren.</p>
-                `;
-            }
+        document.querySelectorAll('.track-option input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                document.querySelectorAll('.track-option').forEach(el => el.classList.remove('selected'));
+                radio.closest('.track-option').classList.add('selected');
+                selectedTrack = radio.value;
+            });
+        });
 
-            document.getElementById('modal-overlay').style.display = 'flex';
+        function showStep(id) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
         }
 
-        function closeModal() {
-            document.getElementById('modal-overlay').style.display = 'none';
+        function openForm() {
+            document.getElementById('modal-overlay').style.display = 'flex';
+            showStep('step-track');
+        }
+        function closeModal() { document.getElementById('modal-overlay').style.display = 'none'; }
+        function goToStep1() { showStep('step-track'); }
+        function goToStep2() {
+            if (!selectedTrack) { document.getElementById('track-error').style.display = 'block'; return; }
+            document.getElementById('track-error').style.display = 'none';
+            showStep('step-contact');
+        }
+
+        function submitForm() {
+            const name = document.getElementById('name').value.trim();
+            const contact = document.getElementById('contact').value.trim();
+            if (!name || !contact) { document.getElementById('contact-error').style.display = 'block'; return; }
+            document.getElementById('contact-error').style.display = 'none';
+
+            let count = parseInt(localStorage.getItem('dresden-count') || '0');
+            count++; if (count > 6) count = 1;
+            localStorage.setItem('dresden-count', count);
+
+            const conf = document.getElementById('confirmation');
+            if (count < 6) {
+                conf.innerHTML = `
+                    <h2>Danke!</h2>
+                    <p>Hey <strong>${name}</strong> — du bist die/der <strong>${ordinals[count-1]} Teilnehmende</strong>.</p>
+                    <p>Terminwunsch: <strong>${trackNames[selectedTrack]}</strong>.</p>
+                    <p style="margin-top:1rem">Sobald die Gruppe voll ist (max. 6), melde ich mich mit:</p>
+                    <ul>
+                        <li>Startermin & Wochentag (abgestimmt auf die Gruppe)</li>
+                        <li>Bankverbindung (60€ Einwurf – Wise-Konto)</li>
+                        <li>Einwahldaten / Adresse für die Sessions</li>
+                    </ul>
+                    <p style="margin-top:1rem">Ich melde mich, sobald wir vollzählig sind.</p>`;
+            } else {
+                conf.innerHTML = `
+                    <h2>Gruppe voll.</h2>
+                    <p>Hey <strong>${name}</strong> — du bist die/der <strong>sechste und letzte Teilnehmende</strong>. Die Gruppe ist vollzählig.</p>
+                    <p>Terminwunsch: <strong>${trackNames[selectedTrack]}</strong>.</p>
+                    <p style="margin-top:1rem">Wir legen zeitnah los. Du bekommst in Kürze:</p>
+                    <ul>
+                        <li>Startermin & Wochentag (basierend auf den Rückmeldungen)</li>
+                        <li>Bankverbindung (60€ Einwurf – Wise-Konto)</li>
+                        <li>Einwahldaten / Adresse für die Sessions</li>
+                    </ul>
+                    <p style="margin-top:1rem">Ich melde mich direkt bei dir und den anderen, um den Start zu fixieren.</p>`;
+            }
+            showStep('step-confirm');
+
+            const subject = encodeURIComponent(`[Arbeit für Lau Dresden] ${name} — Option ${selectedTrack}`);
+            const body = encodeURIComponent(`Name: ${name}\nKontakt: ${contact}\nTermin: Option ${selectedTrack} (${trackNames[selectedTrack]})\nTeilnehmende/r #: ${count}`);
+            window.location.href = `mailto:benjamin.t.karcher@gmail.com?subject=${subject}&body=${body}`;
+        }
+
+        function openWaitlist() { document.getElementById('waitlist-overlay').style.display = 'flex'; }
+        function closeWaitlist() { document.getElementById('waitlist-overlay').style.display = 'none'; }
+        function submitWaitlist() {
+            const name = document.getElementById('w-name').value.trim();
+            const contact = document.getElementById('w-contact').value.trim();
+            if (!name) return;
+            closeWaitlist();
+            const subject = encodeURIComponent(`[Arbeit für Lau Dresden] Warteliste — ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nKontakt: ${contact}\nWARTELISTE`);
+            window.location.href = `mailto:benjamin.t.karcher@gmail.com?subject=${subject}&body=${body}`;
         }
     </script>
 
 </body>
-
 </html>
