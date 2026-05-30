@@ -130,7 +130,7 @@
             width: 100%;
         }
 
-        /* A4 Page Layout for Browser Preview (styled as sheet of paper) */
+        /* A4 Page Layout for Browser Preview */
         .a4-page {
             background-color: #ffffff;
             width: 210mm;
@@ -552,7 +552,7 @@
                 margin: 0 !important;
             }
 
-            .control-panel {
+            .control-panel, footer {
                 display: none !important;
             }
 
@@ -887,6 +887,12 @@
         </div>
 
     </div>
+
+    <!-- Legal Footer at the bottom of page (hidden when printing) -->
+    <footer style="text-align:center; padding:3rem 1rem 1rem 1rem; font-size:0.75rem; font-family:'Inter',sans-serif; width: 100%; margin-top: auto;">
+        <a href="https://legal-bk.vercel.app#impressum" style="color:#ffcc00; text-decoration:none; margin-right:1.5rem;">Impressum</a>
+        <a href="https://legal-bk.vercel.app#datenschutz" style="color:#ffcc00; text-decoration:none;">Datenschutz</a>
+    </footer>
 
     <script>
         function setMode(mode) {
